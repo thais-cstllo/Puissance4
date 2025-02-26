@@ -11,8 +11,14 @@ public class UserInterface extends JFrame implements ActionListener {
     private JPanel gridPanel;
     private Grid aGrid;
     private CircleCell[][] displayedCells; // Stocke les cellules affichées
+    private String pseudo;
+    private String pseudo1;
 
-    public UserInterface(final Engine pEngine) {
+    public void setEngine(Engine pEngine) {
+
+    }
+
+    public UserInterface(Engine pEngine) {
         this.aEngine = pEngine;
         this.aGrid = this.aEngine.getGrid();  // Récupérer la grille de Engine
         this.displayedCells = this.aGrid.getGrid(); // Lier les cellules affichées à celles du modèle
@@ -24,6 +30,37 @@ public class UserInterface extends JFrame implements ActionListener {
         frame.setSize(800, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setBackground(Color.BLACK);
+        frame.setVisible(true);
+
+        //Affichage de la première fenettre pour choisir son pseudo et sa couleur
+        Windows windows = new Windows(frame);
+        windows.setVisible(true);
+        if (!windows.isValide()) {
+            System.exit(0); // Quitter si l'utilisateur annule
+        }
+        frame.setVisible(true);
+        pseudo = windows.getPseudo();
+        String couleur = windows.getCouleur();
+        JOptionPane.showMessageDialog(null, "Pseudo : " + pseudo + "\nCouleur choisie : " + couleur,
+                "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+
+        //Affichage de la deuxième fenettre fenetre pour choisir son pseudo et sa couleur
+        Windows windows1 = new Windows(frame);
+        windows1.setVisible(true);
+        if (!windows1.isValide()) {
+            System.exit(0); // Quitter si l'utilisateur annule
+        }
+
+        pseudo1 = windows1.getPseudo();
+        String couleur1 = windows1.getCouleur();
+        if (couleur.equals(couleur1)) {
+            JOptionPane.showMessageDialog(null, "Cette couleur est déjà prise, choisissez-en une autre !", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+        System.out.println("Pseudo 1 : " + pseudo);
+        System.out.println("Pseudo 2 : " + pseudo1);
+
+        JOptionPane.showMessageDialog(null, "Pseudo : " + pseudo1 + "\nCouleur choisie : " + couleur1,
+                "Confirmation", JOptionPane.INFORMATION_MESSAGE);
 
         JLayeredPane layeredPane = new JLayeredPane();
         frame.setContentPane(layeredPane);
@@ -76,7 +113,11 @@ public class UserInterface extends JFrame implements ActionListener {
         }
     }
 
-    public void afficheVictoire(int pId){
+    public void saisiPseudoCouleur(){
+
+    }
+
+    public void afficheVictoire(String pNom){
         this.frame = new JFrame("Puissance4");
         frame.setSize(470, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,7 +127,7 @@ public class UserInterface extends JFrame implements ActionListener {
 
         frame.setBackground(Color.BLACK);
 
-        ImageIcon originalIcon = new ImageIcon("C:\\Users\\thado\\IdeaProjects\\Puissance4\\src\\victoire.jpg");
+        ImageIcon originalIcon = new ImageIcon("src\\victoire.jpg");
         Image image = originalIcon.getImage().getScaledInstance(470, 300, Image.SCALE_SMOOTH);
         ImageIcon resizedIcon = new ImageIcon(image);
 
@@ -96,14 +137,14 @@ public class UserInterface extends JFrame implements ActionListener {
         imageLabel.setIcon(resizedIcon);
 
         // Ajout de l'image au panneau
-        layeredPane.add(imageLabel, new Integer(2));
+        layeredPane.add(imageLabel, new Integer(1));
 
-        JLabel label1 = new JLabel("Le joueur "+pId+" a gagné ! ", SwingConstants.CENTER);
-        label1.setBounds(0, 0, 470, 40);
+        JLabel label1 = new JLabel("Le joueur "+pNom+" a gagné ! ", SwingConstants.CENTER);
+        label1.setBounds(0, 350, 470, 40);
         label1.setFont(new Font("Arial", Font.BOLD, 24));
         label1.setForeground(Color.BLUE);
 
-        layeredPane.add(label1, new Integer(1));
+        layeredPane.add(label1, new Integer(2));
 
         frame.setVisible(true);
     }
@@ -117,5 +158,11 @@ public class UserInterface extends JFrame implements ActionListener {
         for(int i = 0; i < buttons.length; i++){
             buttons[i].setEnabled(pOnOff);
         }
+    }
+    public String getPseudo() {
+        return pseudo;
+    }
+    public String getPseudo1() {
+        return pseudo1;
     }
 }
