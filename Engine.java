@@ -11,6 +11,8 @@ public class Engine {
         this.aP2 = aP2;
         this.aGrid = new Grid();
         this.aMainPlayer = this.aP1;
+        System.out.println("aP1 : " + this.aP1);
+        System.out.println("aP2 : " + this.aP2);
     }
 
     public void setUI(UserInterface pUI) {
@@ -20,12 +22,13 @@ public class Engine {
     public Grid getGrid() {return this.aGrid;}
 
     public void move(final int column) {
-        int vId = this.aMainPlayer.getId();
-
+        System.out.println("aP1 : " + this.aP1.getName());
+        System.out.println("aP2 : " + this.aP2.getName());
+        String vNom = this.aMainPlayer.getName();
         this.aGrid.changeCellColor(column,this.aMainPlayer.getId()); // Insère le pion dans la colonne choisie
         if(this.checkVictory(this.aMainPlayer)) {
-            System.out.printf("le joueur " + vId + " a gagné ! ");  // Vérifie si le joueur a gagné
-            this.aUI.afficheVictoire(vId);
+            System.out.printf("le joueur " + vNom+ " a gagné ! ");  // Vérifie si le joueur a gagné
+            this.aUI.afficheVictoire(vNom);
             this.endGame();
             return;
         }
@@ -39,12 +42,12 @@ public class Engine {
     /**
      * Methode à utiliser après le jeu du joueur pour faire changer le joueur principal
      */
-    public void alternate() {
-        if (this.aMainPlayer.equals(this.aP1))
-            this.setMainPlayer(this.aP2);
-        else
-            this.setMainPlayer(this.aP1);
-    }
+        public void alternate() {
+            if (this.aMainPlayer.equals(this.aP1))
+                this.setMainPlayer(this.aP2);
+            else
+                this.setMainPlayer(this.aP1);
+        }
 /*
     public Player alternate2() {
         if (this.aMainPlayer == this.aP1.getId()){
