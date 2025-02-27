@@ -98,7 +98,7 @@ public class UserInterface extends JFrame implements ActionListener {
         buttons = new JButton[7];
 
         for (int i = 0; i < 7; i++) {
-            buttons[i] = new JButton("Colonne"+ (i+1));
+            buttons[i] = new JButton("");
             buttons[i].setBackground(Color.BLUE);
             buttons[i].addActionListener(this);
             buttonPanel.add(buttons[i]);
