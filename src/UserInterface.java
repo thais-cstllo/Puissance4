@@ -165,6 +165,32 @@ public class UserInterface extends JFrame implements ActionListener {
             buttons[i].setEnabled(pOnOff);
         }
     }
+
+    public void afficheEx(){
+        this.frame = new JFrame("Puissance4");
+        frame.setSize(470, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setLayout(null);
+        frame.setContentPane(layeredPane);
+
+        frame.setBackground(Color.BLACK);
+
+        JLabel label1 = new JLabel("Match null !", SwingConstants.CENTER);
+        label1.setBounds(0, 350, 470, 40);
+        label1.setFont(new Font("Arial", Font.BOLD, 24));
+        label1.setForeground(Color.BLUE);
+
+        layeredPane.add(label1, 2);
+
+        frame.setVisible(true);
+    }
+
+
+    public void disableSpecificButton(final int pButtonIndex){
+        buttons[pButtonIndex].setEnabled(false);
+    }
+
     public String getPseudo() {
         return pseudo;
     }

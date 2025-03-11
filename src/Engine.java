@@ -30,16 +30,18 @@ public class Engine {
 
     public Grid getGrid() {return this.aGrid;}
 
-    public void move(final int column) {
+    public void move(final int pCol) {
         String vNom = this.aMainPlayer.getName();
         System.out.println("Player : " + vNom + this.aMainPlayer.getId()+ this.aMainPlayer.getColor());
-        this.aGrid.changeCellColor(column,this.aMainPlayer); // Insère le pion dans la colonne choisie
+        this.aGrid.changeCellColor(pCol,this.aMainPlayer); // Insère le pion dans la colonne choisie
         if(this.checkVictory(this.aMainPlayer)) {
             System.out.printf("le joueur " + vNom+ " a gagné ! ");  // Vérifie si le joueur a gagné
             this.aUI.afficheVictoire(vNom);
             this.endGame();
             return;
         }
+        if(isColFull(pCol)) { this.aUI.disableSpecificButton(pCol); }
+        if(isGridFull()) { this.aUI.afficheEx(); this.endGame(); }
         this.alternate(); // Passe au joueur suivant
     }
 
@@ -157,6 +159,17 @@ public class Engine {
 
     public void endGame(){
         this.aUI.enable(false);
+    }
+
+    public boolean isColFull(final int pCol) {
+        return this.aGrid.getGrid()[0][pCol].getState() !=  0;
+    }
+
+    public boolean isGridFull(){
+        for(int col = 0 ; col < this.aGrid.COLS ; col++){
+            if(!(isColFull(col))) return false;
+        }
+        return true;
     }
 
 }

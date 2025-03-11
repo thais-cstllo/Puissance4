@@ -20,7 +20,7 @@ public class Windows  extends JDialog implements ActionListener{
 
         //Fenêtre de couleurs
         add(new JLabel("Color :"));
-        String[] couleurs = {"Red", "Yellow", "Blue", "Green"};
+        String[] couleurs = {"Red", "Yellow", "Cyan", "Green"};
         couleurBox = new JComboBox<>(couleurs);
         add(couleurBox);
 

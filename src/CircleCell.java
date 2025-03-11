@@ -16,7 +16,7 @@ public class CircleCell extends JPanel {
         this.aColors.put(1,"RED");
         this.aColors.put(2,"YELLOW");
         this.aColors.put(3,"GREEN");
-        this.aColors.put(4,"BLUE");
+        this.aColors.put(4,"CYAN");
         this.aColors.put(0,"BLACK");
         this.aState = 0;
         this.circleColor = Color.BLACK;
@@ -67,8 +67,8 @@ public class CircleCell extends JPanel {
                 return Color.YELLOW;
             case "GREEN":
                 return Color.GREEN;
-            case "BLUE":
-                return Color.BLUE;
+            case "CYAN":
+                return Color.CYAN;
             case "BLACK":
                 return Color.BLACK;
             default :
